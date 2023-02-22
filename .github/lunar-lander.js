@@ -11,4 +11,8 @@ function rocketShip(x, y, s) {
   //Rocket body
   fill(0, 120, 0);
   ellipse(x, y + 100 * s, 100 * s, 330 * s);
+  ellipse(x, y + 40 * s, 45 * s);
+  fill(255, 255, 255);
+  strokeWeight(3);
+  ellipse(x, y + 40 * s, 40 * s);
 }
