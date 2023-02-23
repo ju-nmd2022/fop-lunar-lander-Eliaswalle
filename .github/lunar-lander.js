@@ -63,26 +63,51 @@ let acceleration = 0.2;
 let isGameActive = true;
 let speed = 0;
 
-function scenery() {
-  push();
-  noStroke();
-  fill("lightblue");
-  rect(0, 0, width, height);
+// function scenery() {
+//   push();
+//   noStroke();
+//   fill("lightblue");
+//   rect(0, 0, width, height);
 
-  fill("green");
-  rect(0, 500, width, 300);
-  pop();
-}
+//   fill("green");
+//   rect(0, 500, width, 300);
+//   pop();
+// }
 
 function draw() {
-  scenery();
-  rocketShip(x, rocketShipY, 0.4, rotate);
-
+   //for the stars
+    noStroke();
+    background(0, 0, 0);
+    for (let index in starX) {
+      fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
+      ellipse(starX[index], starY[index], 3);
+      starAlpha[index] = starAlpha[index] + 0.02;
+  //the moon and ladning place
+      fill(180, 180, 180);
+      ellipse(350, 1100, 1200);
+      fill(120, 120, 120);
+      ellipse(200, 600, 90, 70);
+      ellipse(100, 600, 20);
+      ellipse(300, 600, 30);
+      ellipse(490, 600, 100, 70);
+      ellipse(400, 550, 50);
+      push();
+      strokeWeight(3);
+      stroke(255, 256, 255);
+      line(260, 520, 280, 500);
+      line(400, 500, 420, 520);
+      line(340, 500, 340, 530);
+      ellipse(340, 500, 190, 20);
+      pop();
+    }
+//rocketship function
+stroke(0.5);
+    rocketShip(x, rocketShipY, 0.5, rotate);
   if (isGameActive) {
     rocketShipY = rocketShipY + velocity;
     velocity = velocity + acceleration;
     x = x + speed;
-    if (rocketShipY > 200) {
+    if (rocketShipY > 175) {
       isGameActive = false;
     }
 
@@ -97,9 +122,9 @@ function draw() {
       speed = 0;
     }
   }
+  
 }
-
-
+//stars
 let starX = [];
 let starY = [];
 let starAlpha = [];
@@ -112,6 +137,8 @@ for (let i = 0; i < 200; i++) {
   starY.push(y);
   starAlpha.push(alpha);
 }
+
+
 
 
 // function draw() {
