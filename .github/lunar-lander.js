@@ -2,8 +2,9 @@ let x = 200;
 let y = 200;
 let s = 0.8;
 
-//top of the ship
 function rocketShip(x, y, s) {
+  //top of the ship
+
   translate(x, y, s);
   fill(210, 20, 210);
   triangle(x - 10 * s, y - 40 * s, x + 10 * s, y - 40 * s, x, y - 150 * s);
@@ -30,6 +31,7 @@ function rocketShip(x, y, s) {
     x + 95 * s,
     y + 290 * s
   );
+
   //Rocket leg:Left
   fill(210, 20, 210);
   ellipse(x - 50 * s, y + 180 * s, 30 * s);
@@ -53,45 +55,47 @@ function rocketShip(x, y, s) {
   ellipse(x, y + 200 * s, 20 * s);
   fill(255, 255, 255);
   triangle(x - 10 * s, y + 210 * s, x + 10 * s, y + 210 * s, x, y + 290 * s);
-  let rocketShipY = 30;
-  let velocity = 1;
-  let acceleration = 0.2;
-  let isGameActive = true;
-  let speed = 0;
+}
 
-  function scenery() {
-    push();
-    noStroke();
-    fill("lightblue");
-    rect(0, 0, width, height);
+let rocketShipY = 30;
+let velocity = 1;
+let acceleration = 0.2;
+let isGameActive = true;
+let speed = 0;
 
-    fill("green");
-    rect(0, 500, width, 300);
-    pop();
-  }
+function scenery() {
+  push();
+  noStroke();
+  fill("lightblue");
+  rect(0, 0, width, height);
 
-  function draw() {
-    scenery();
-    rocketShip(x, rocketShipY, 0.4, rotate);
+  fill("green");
+  rect(0, 500, width, 300);
+  pop();
+}
 
-    if (isGameActive) {
-      rocketShipY = rocketShipY + velocity;
-      velocity = velocity + acceleration;
-      x = x + speed;
-      if (rocketShipY > 200) {
-        isGameActive = false;
-      }
+function draw() {
+  scenery();
+  rocketShip(x, rocketShipY, 0.4, rotate);
 
-      if (keyIsDown(38)) {
-        velocity = velocity - 1.0;
-      }
-      if (keyIsDown(39)) {
-        speed = 5;
-      } else if (keyIsDown(37)) {
-        speed = -5;
-      } else {
-        speed = 0;
-      }
+  if (isGameActive) {
+    rocketShipY = rocketShipY + velocity;
+    velocity = velocity + acceleration;
+    x = x + speed;
+    if (rocketShipY > 200) {
+      isGameActive = false;
+    }
+
+    if (keyIsDown(38)) {
+      velocity = velocity - 1.0;
+    }
+    if (keyIsDown(39)) {
+      speed = 5;
+    } else if (keyIsDown(37)) {
+      speed = -5;
+    } else {
+      speed = 0;
     }
   }
 }
+
