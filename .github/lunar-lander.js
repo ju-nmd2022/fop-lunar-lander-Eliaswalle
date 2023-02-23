@@ -99,3 +99,46 @@ function draw() {
   }
 }
 
+
+let starX = [];
+let starY = [];
+let starAlpha = [];
+for (let i = 0; i < 200; i++) {
+  const x = Math.floor(Math.random() * width);
+  const y = Math.floor(Math.random() * height);
+  const alpha = Math.random();
+
+  starX.push(x);
+  starY.push(y);
+  starAlpha.push(alpha);
+}
+
+
+// function draw() {
+//   noStroke();
+//   background(0, 0, 0);
+
+//   for (let index in starX) {
+//     fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
+//     ellipse(starX[index], starY[index], 3);
+//     starAlpha[index] = starAlpha[index] + 0.02;
+
+//     fill(180, 180, 180);
+//     ellipse(350, 1100, 1200);
+//     fill(120, 120, 120);
+//     ellipse(200, 600, 90, 70);
+//     ellipse(100, 600, 20);
+//     ellipse(300, 600, 30);
+//     ellipse(490, 600, 100, 70);
+//     ellipse(400, 550, 50);
+//     push();
+//     strokeWeight(3);
+//     stroke(255, 256, 255);
+//     line(260, 520, 280, 500);
+//     line(400, 500, 420, 520);
+//     line(340, 500, 340, 530);
+//     ellipse(340, 500, 190, 20);
+//     pop();
+//   }
+// }
+
