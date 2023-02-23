@@ -53,4 +53,45 @@ function rocketShip(x, y, s) {
   ellipse(x, y + 200 * s, 20 * s);
   fill(255, 255, 255);
   triangle(x - 10 * s, y + 210 * s, x + 10 * s, y + 210 * s, x, y + 290 * s);
+  let rocketShipY = 30;
+  let velocity = 1;
+  let acceleration = 0.2;
+  let isGameActive = true;
+  let speed = 0;
+
+  function scenery() {
+    push();
+    noStroke();
+    fill("lightblue");
+    rect(0, 0, width, height);
+
+    fill("green");
+    rect(0, 500, width, 300);
+    pop();
+  }
+
+  function draw() {
+    scenery();
+    rocketShip(x, rocketShipY, 0.4, rotate);
+
+    if (isGameActive) {
+      rocketShipY = rocketShipY + velocity;
+      velocity = velocity + acceleration;
+      x = x + speed;
+      if (rocketShipY > 200) {
+        isGameActive = false;
+      }
+
+      if (keyIsDown(38)) {
+        velocity = velocity - 1.0;
+      }
+      if (keyIsDown(39)) {
+        speed = 5;
+      } else if (keyIsDown(37)) {
+        speed = -5;
+      } else {
+        speed = 0;
+      }
+    }
+  }
 }
