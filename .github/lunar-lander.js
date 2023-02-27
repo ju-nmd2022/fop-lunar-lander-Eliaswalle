@@ -77,29 +77,45 @@ function moonLanding() {
   pop();
 }
 function startScreen() {
+  background(0, 0, 0);
   rect(200, 200, 300);
-  text("Welcome to moon lander!", 275, 300);
-  text("Click Mouse in order to start the game", 250, 380);
-  text("Pro tip use the arrow keys!!!!", 280, 420);
+  text("Welcome to moon landing!", 275, 300);
+  text("Click Space in order to start the game", 250, 380);
+  text("Tip use the arrow keys!!!! (use arrow up to start)", 230, 420);
+
+  if (keyIsDown(32)) {
+    x = 200;
+    rocketShipY = 25;
+    velocity = 1;
+    state = "game";
+  }
 }
 function winScreen() {
   background(0, 255, 0);
   text("Congratulations YOU WON", 300, 350);
+  text("Press enter to go back!",300,370);
+  if (keyIsDown(13)){
+    state = "start";
+  }
 }
 function loseScreen() {
   background(255, 0, 0);
   text("NO NO NO YOU LOSE", 300, 350);
+  text("Press enter to go back!",300,370);
+  if (keyIsDown(13))
+   state = "start";
 }
 function gameScreen() {
   noStroke();
   background(0, 0, 0);
-  moonLanding();
+
   //for the stars
   for (let index in starX) {
     fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
     ellipse(starX[index], starY[index], 3);
     starAlpha[index] = starAlpha[index] + 0.02;
   }
+  moonLanding();
   //rocketship function upp and down
   stroke(0.3);
   rocketShip(x, rocketShipY, 0.35);
@@ -108,28 +124,34 @@ function gameScreen() {
     velocity = velocity + acceleration;
     x = x + speed;
   }
-  if (keyIsDown(32)) {
+  if (keyIsDown(38)) {
     isGameActive = true;
   }
   if (rocketShipY > 195) {
     isGameActive = false;
-    rocketShipY = 25;
+ if (velocity > 3 || x > 434 || x < 246 ){
+  state = "lose";
+
+ } else state = "win"; 
+ 
     velocity = 0;
   } else if (keyIsDown(38)) {
-    velocity = velocity - 1.0;
+    velocity = velocity - 0.5; 
   } else if (keyIsDown(39)) {
     speed = 5;
   } else if (keyIsDown(37)) {
     speed = -5;
-  } else {
+  } else { 
     speed = 0;
   }
+  
+  console.log(x);
 }
 //stars
 let starX = [];
 let starY = [];
 let starAlpha = [];
-for (let i = 0; i < 200; i++) {
+for (let i = 0; i < 200; i++) { 
   const x = Math.floor(Math.random() * width);
   const y = Math.floor(Math.random() * height);
   const alpha = Math.random();
@@ -138,7 +160,7 @@ for (let i = 0; i < 200; i++) {
   starY.push(y);
   starAlpha.push(alpha);
 }
-let state = "start";
+let state = "game";  
 function draw() {
   if (state === "start") {
     startScreen();
@@ -148,13 +170,9 @@ function draw() {
     winScreen();
   } else if (state === "lose") {
     loseScreen();
+  } if (state === "game"){
+ 
   }
+}
 
-
-  }
-
-  function keyIsDown() {
-    if (KeyIsDown(32)){
-    state = "game";
-    }
-    }
+ 
