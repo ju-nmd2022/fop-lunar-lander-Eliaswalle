@@ -4,11 +4,9 @@ let s = 0.8;
 
 function rocketShip(x, y, s) {
   //top of the ship
-
   translate(x, y, s);
   fill(210, 20, 210);
   triangle(x - 10 * s, y - 40 * s, x + 10 * s, y - 40 * s, x, y - 150 * s);
-
   //Rocket body
   fill(0, 120, 0);
   ellipse(x, y + 100 * s, 100 * s, 330 * s);
@@ -16,7 +14,6 @@ function rocketShip(x, y, s) {
   fill(255, 255, 255);
   strokeWeight(3);
   ellipse(x, y + 40 * s, 40 * s);
-
   //Rocket leg:Right
   fill(210, 20, 210);
   ellipse(x + 50 * s, y + 180 * s, 30 * s);
@@ -31,7 +28,6 @@ function rocketShip(x, y, s) {
     x + 95 * s,
     y + 290 * s
   );
-
   //Rocket leg:Left
   fill(210, 20, 210);
   ellipse(x - 50 * s, y + 180 * s, 30 * s);
@@ -46,9 +42,7 @@ function rocketShip(x, y, s) {
     x - 95 * s,
     y + 290 * s
   );
-
   //Rocket leg:midde
-  //triangle(190, 370, 210, 370, 200, 490);
   fill(210, 20, 210);
   ellipse(x, y + 180 * s, 30 * s);
   ellipse(x, y + 190 * s, 25 * s);
@@ -56,65 +50,73 @@ function rocketShip(x, y, s) {
   fill(255, 255, 255);
   triangle(x - 10 * s, y + 210 * s, x + 10 * s, y + 210 * s, x, y + 290 * s);
 }
+function startScreen() {
+  rect(200, 200, 300);
 
-let rocketShipY = 30;
+  text("Welcome to moon lander!", 275, 300);
+  text("Press space in order to start the game",250,380);
+}
+function winScreen(){
+    background (0,255,0);
+    text("Congratulations YOU WON",300,350);
+
+}
+function loseScreen(){
+background(255,0,0);
+text("NO NO NO YOU LOSE",300,350);
+}
+function moonLanding() {
+  fill(180, 180, 180);
+  ellipse(350, 1100, 1200);
+  fill(120, 120, 120);
+  ellipse(200, 600, 90, 70);
+  ellipse(100, 600, 20);
+  ellipse(300, 600, 30);
+  ellipse(490, 600, 100, 70);
+  ellipse(400, 550, 50);
+  push();
+  strokeWeight(3);
+  stroke(255, 256, 255);
+  line(260, 520, 280, 500);
+  line(400, 500, 420, 520);
+  line(340, 500, 340, 530);
+  ellipse(340, 500, 190, 20);
+  pop();
+}
+let rocketShipY = 25;
 let velocity = 1;
 let acceleration = 0.2;
-let isGameActive = true;
+let isGameActive = false;
 let speed = 0;
 
-// function scenery() {
-//   push();
-//   noStroke();
-//   fill("lightblue");
-//   rect(0, 0, width, height);
-
-//   fill("green");
-//   rect(0, 500, width, 300);
-//   pop();
-// }
-
 function draw() {
-   //for the stars
+    //for the stars
     noStroke();
     background(0, 0, 0);
     for (let index in starX) {
       fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
       ellipse(starX[index], starY[index], 3);
       starAlpha[index] = starAlpha[index] + 0.02;
-  //the moon and ladning place
-      fill(180, 180, 180);
-      ellipse(350, 1100, 1200);
-      fill(120, 120, 120);
-      ellipse(200, 600, 90, 70);
-      ellipse(100, 600, 20);
-      ellipse(300, 600, 30);
-      ellipse(490, 600, 100, 70);
-      ellipse(400, 550, 50);
-      push();
-      strokeWeight(3);
-      stroke(255, 256, 255);
-      line(260, 520, 280, 500);
-      line(400, 500, 420, 520);
-      line(340, 500, 340, 530);
-      ellipse(340, 500, 190, 20);
-      pop();
     }
-//rocketship function
-stroke(0.5);
-    rocketShip(x, rocketShipY, 0.5, rotate);
-  if (isGameActive) {
-    rocketShipY = rocketShipY + velocity;
-    velocity = velocity + acceleration;
-    x = x + speed;
-    if (rocketShipY > 175) {
+    //moon function
+    moonLanding();
+    //rocketship function
+    stroke(0.5);
+    rocketShip(x, rocketShipY, 0.35);
+    if (isGameActive) {
+      rocketShipY = rocketShipY + velocity;
+      velocity = velocity + acceleration;
+      x = x + speed;
+    } if (keyIsDown(32)){
+      isGameActive = true;
+    }
+    if (rocketShipY > 195) {
       isGameActive = false;
-    }
-
-    if (keyIsDown(38)) {
+      rocketShipY = 25;
+      velocity = 0;
+    } else if (keyIsDown(38)) {
       velocity = velocity - 1.0;
-    }
-    if (keyIsDown(39)) {
+    } else if (keyIsDown(39)) {
       speed = 5;
     } else if (keyIsDown(37)) {
       speed = -5;
@@ -122,50 +124,16 @@ stroke(0.5);
       speed = 0;
     }
   }
-  
+  //stars
+  let starX = [];
+  let starY = [];
+  let starAlpha = [];
+  for (let i = 0; i < 200; i++) {
+    const x = Math.floor(Math.random() * width);
+    const y = Math.floor(Math.random() * height);
+    const alpha = Math.random();
+
+    starX.push(x);
+    starY.push(y);
+    starAlpha.push(alpha);
 }
-//stars
-let starX = [];
-let starY = [];
-let starAlpha = [];
-for (let i = 0; i < 200; i++) {
-  const x = Math.floor(Math.random() * width);
-  const y = Math.floor(Math.random() * height);
-  const alpha = Math.random();
-
-  starX.push(x);
-  starY.push(y);
-  starAlpha.push(alpha);
-}
-
-
-
-
-// function draw() {
-//   noStroke();
-//   background(0, 0, 0);
-
-//   for (let index in starX) {
-//     fill(255, 255, 255, Math.abs(Math.sin(starAlpha[index])) * 255);
-//     ellipse(starX[index], starY[index], 3);
-//     starAlpha[index] = starAlpha[index] + 0.02;
-
-//     fill(180, 180, 180);
-//     ellipse(350, 1100, 1200);
-//     fill(120, 120, 120);
-//     ellipse(200, 600, 90, 70);
-//     ellipse(100, 600, 20);
-//     ellipse(300, 600, 30);
-//     ellipse(490, 600, 100, 70);
-//     ellipse(400, 550, 50);
-//     push();
-//     strokeWeight(3);
-//     stroke(255, 256, 255);
-//     line(260, 520, 280, 500);
-//     line(400, 500, 420, 520);
-//     line(340, 500, 340, 530);
-//     ellipse(340, 500, 190, 20);
-//     pop();
-//   }
-// }
-
