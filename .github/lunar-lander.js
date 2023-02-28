@@ -169,6 +169,4 @@ function draw() {
   } else if (state === "lose") {
     loseScreen();
   }
-  if (state === "game") {
-  }
 }
