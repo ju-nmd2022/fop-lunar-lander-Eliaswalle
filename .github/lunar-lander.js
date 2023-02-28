@@ -128,7 +128,7 @@ function gameScreen() {
   }
   if (rocketShipY > 195) {
     isGameActive = false;
-    if (velocity > 3 || x > 434 || x < 246) {
+    if (velocity > 3 || x > 205 || x < 125) {
       state = "lose";
     } else state = "win";
 
