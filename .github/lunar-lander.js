@@ -1,4 +1,4 @@
-let x = 200;
+let x = 20;
 let y = 200;
 let s = 0.8;
 let rocketShipY = 25;
@@ -84,7 +84,7 @@ function startScreen() {
   text("Tip use the arrow keys!!!! (use arrow up to start)", 230, 420);
 
   if (keyIsDown(32)) {
-    x = 200;
+    x = 20;
     rocketShipY = 25;
     velocity = 1;
     state = "game";
@@ -131,7 +131,6 @@ function gameScreen() {
     if (velocity > 3 || x > 205 || x < 125) {
       state = "lose";
     } else state = "win";
-
     velocity = 0;
   } else if (keyIsDown(38)) {
     velocity = velocity - 0.5;
