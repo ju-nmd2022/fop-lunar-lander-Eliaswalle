@@ -1,3 +1,8 @@
+function setup() {
+  createCanvas(800, 600);
+  frameRate(30);
+}
+
 let x = 20;
 let y = 200;
 let s = 0.8;
@@ -149,8 +154,8 @@ let starX = [];
 let starY = [];
 let starAlpha = [];
 for (let i = 0; i < 200; i++) {
-  const x = Math.floor(Math.random() * width);
-  const y = Math.floor(Math.random() * height);
+  const x = Math.floor(Math.random() * 800);
+  const y = Math.floor(Math.random() * 600);
   const alpha = Math.random();
 
   starX.push(x);
